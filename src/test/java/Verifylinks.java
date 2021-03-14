@@ -1,3 +1,4 @@
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 
@@ -13,13 +14,17 @@ public class Verifylinks {
         driver.manage().window().maximize();
         driver.get(Utils.BASE_URL);
         //we take all the links from the file "link_list.txt" and validate them.
-        File ll = new File("link_list.txt");
+        File ll = new File("FooterLinks.txt");
         Scanner ol = new Scanner(ll);
         while (ol.hasNextLine()) {
             String line = ol.nextLine();
-            driver.get(line);
-            String url = driver.getCurrentUrl();
-            if (url.equalsIgnoreCase(line)) {
+            String[] details = line.split(" - ");
+            String preficks = details[0];
+            String url = details[1];
+           // driver.findElement(By.xpath(""))
+            driver.get(url);
+            //String url = driver.getCurrentUrl();
+            if (url.equalsIgnoreCase(url)) {
                 System.out.println("test pass");
             }
             // In the last 4 tests fails need to login to the system
