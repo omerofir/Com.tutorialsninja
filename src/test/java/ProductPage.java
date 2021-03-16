@@ -4,8 +4,13 @@ import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 
-    public class ProductPage {
-        public static void main(String[] args) throws InterruptedException {
+import javax.lang.model.element.Element;
+import java.awt.*;
+import java.awt.datatransfer.StringSelection;
+import java.awt.event.KeyEvent;
+
+public class ProductPage {
+        public static void main(String[] args) throws InterruptedException, AWTException {
             System.setProperty("webdriver.chrome.driver", Utils.CHROME_DRIVER_LOCATION);
             WebDriver driver = new ChromeDriver();
             driver.manage().window().maximize();
@@ -20,14 +25,27 @@ import org.openqa.selenium.chrome.ChromeDriver;
             driver.findElement(By.xpath("//select[@id='input-option217']")).click();
             driver.findElement(By.xpath("//*[@id=\"input-option217\"]/option[2]")).click();
             driver.findElement(By.xpath("//textarea[@id='input-option209']")).sendKeys("V.I.P");
-            WebElement chooseFile = driver.findElement(By.xpath("//button[normalize-space()='Upload File']"));
-            chooseFile.click();
-            Thread.sleep(1000);
-           // chooseFile.sendKeys("d:\\selenium\\CHANGELOG.txt");
-           // String handle = driver.getWindowHandle();
-           // System.out.println(handle);
-         //   driver.switchTo().window("Open").close();//(handle);
-          driver.switchTo().activeElement().sendKeys("d:\\selenium\\CHANGELOG.txt");
+
+            Thread.sleep(2000);
+            WebElement element = driver.findElement(By.id("button-upload222"));
+            element.click();
+
+            StringSelection ss = new StringSelection("Testsomething.png");
+            Toolkit.getDefaultToolkit().getSystemClipboard().setContents(ss, null);
+            // Ctrl + v
+            Robot robot = new Robot();
+            robot.keyPress(KeyEvent.VK_CONTROL);
+            robot.keyPress(KeyEvent.VK_V);
+            Thread.sleep(2000);
+            robot.keyRelease(KeyEvent.VK_V);
+            robot.keyRelease(KeyEvent.VK_CONTROL);
+            Thread.sleep(2000);
+            robot.keyPress(KeyEvent.VK_ENTER);
+            robot.keyRelease(KeyEvent.VK_ENTER);
+            Thread.sleep(2000);
+            driver.switchTo().alert().dismiss();
+            Thread.sleep(2000);
+
 
             //     WebElement  chooseFile = (WebElement) driver.findElements(By.xpath("//button[normalize-space()='Upload File']"));
             //   chooseFile.sendKeys("link_list.txt");
