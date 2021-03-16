@@ -85,6 +85,44 @@ import org.openqa.selenium.WebDriver;
             driver.findElement(By.xpath("//input[@id='input-voucher']")).sendKeys("Ab123456");
             driver.findElement(By.xpath("//input[@id='button-voucher']")).click();
 
+            //proceed checkout
+            driver.findElement(By.xpath("//a[@class='btn btn-primary']")).click();
+            Thread.sleep(1000);
+
+            //choose user: new/register/gust
+            driver.findElement(By.xpath("//input[@value='guest']")).click();
+            driver.findElement(By.xpath("//input[@id='button-account']")).click();
+            Thread.sleep(2000);
+
+            //input gust user detailes
+            driver.findElement(By.xpath("//input[@id='input-payment-firstname']")).sendKeys("israel");
+            driver.findElement(By.xpath("//input[@id='input-payment-lastname']")).sendKeys("israeli");
+            driver.findElement(By.xpath("//input[@id='input-payment-email']")).sendKeys("israel123@gmail.com");
+            driver.findElement(By.xpath("//input[@id='input-payment-telephone']")).sendKeys("02-555256");
+            driver.findElement(By.xpath("//input[@id='input-payment-address-1']")).sendKeys("Alenby");
+            driver.findElement(By.xpath("//input[@id='input-payment-city']")).sendKeys("Tel Aviv");
+            driver.findElement(By.xpath("//input[@id='button-guest']")).click();
+            Thread.sleep(2000);
+
+            //Leave a comment about your order
+            driver.findElement(By.xpath("//textarea[@name='comment']")).sendKeys("Need the item Asap");
+            driver.findElement(By.xpath("//input[@id='button-shipping-method']")).click();
+            Thread.sleep(2000);
+
+            //Accept the terms
+            driver.findElement(By.xpath("//input[@name='agree']")).click();
+            driver.findElement(By.xpath("//input[@id='button-payment-method']")).click();
+            Thread.sleep(2000);
+
+            //Order confiermation
+            driver.findElement(By.xpath("//input[@id='button-confirm']")).click();
+            Thread.sleep(1000);
+            String confiermation = driver.findElement(By.xpath("//h1[normalize-space()='Your order has been placed!']")).getText();
+            System.out.println(confiermation);
+            Thread.sleep(1000);
+            driver.findElement(By.xpath("//a[normalize-space()='Continue']")).click();
+
+
 
         }
     }
